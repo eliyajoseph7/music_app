@@ -20,23 +20,31 @@ class Author(models.Model):
 class Post(models.Model):
     title           = models.CharField(max_length=50, blank=True, null=True)
     description     = models.TextField(max_length=500)
-    body            = models.TextField(default='', blank=True)
-    video_url       = models.URLField(max_length=500)
+    body            = models.TextField(default='')
+    video_url       = models.URLField(max_length=500, blank=True)
     slug            = models.SlugField(default='', blank=True, max_length=40, unique=True)
     image           = models.ImageField(upload_to='post_images')
-    info_source     = models.CharField(max_length=100, blank=True)
     date            = models.DateField(auto_now=True)
     author          = models.ForeignKey(Author, on_delete=models.CASCADE)
-    # author_id       = models.IntegerField()
     image_thumbnail = ImageSpecField(source='image',
                                         processors=[ResizeToFill(1332, 850)],
                                         format='JPEG',
                                         options={'quality': 70})
-
+    
     def save(self):
         self.slug = slugify(self.title)
         super(Post, self).save()
 
     def __str__(self):
         return '%s' % self.title
+
+    class Meta:
+        ordering = ['id']
         
+class InfoSource(models.Model):
+    info_source = models.URLField()        
+    post        = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.post.title
+    

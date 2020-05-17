@@ -1,24 +1,39 @@
 from django.shortcuts import render
-from .models import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import Post, InfoSource
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
 
-def videos_image(request):
-    posts = Post.objects.all()
-    # context = {
-    #     'title': obj.title,
-    #     'image': obj.image
-    # }
-    return render(request, 'videos.html', {'posts': posts})
+def blog_home(request):
+    post = Post.objects.all()
+    page = request.GET.get('page', 1)
 
-def video_infos(request, the_slug):
+    paginator = Paginator(post, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'blog/blog_home.html', {'posts': posts})
+
+def blog_info(request, the_slug):
     obj = Post.objects.get(slug=the_slug)
+    infoSources = InfoSource.objects.filter(post=obj.id)
+    
     context = {
-        'object': obj
+        'object': obj,
+        'infoSources': infoSources
     }
-    return render(request, 'video.html', context)
+    return render(request, 'blog/blog_details.html', context)
 
 def emmanuel_tv(request):
     return render(request, 'emmanueltv/etv.html')
+
+def test(request):
+    posts = Post.objects.all()
+    return render(request, 'home.html',  {'posts': posts})
+
+

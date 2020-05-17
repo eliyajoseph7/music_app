@@ -22,13 +22,14 @@ import music
 
 
 extra_patterns = [
-    path('video/<slug:the_slug>', view.video_infos),
+    path('blog-details/<slug:the_slug>', view.blog_info),
     
 ] 
 
 urlpatterns = [
     path('', view.index),
-    path('videos', view.videos_image),
+    path('blog-home', view.blog_home),
+    path('test', view.blog_home),
     path('', include(extra_patterns), name="view_info"),
     path('etv', view.emmanuel_tv),
     path('admin/', admin.site.urls),
