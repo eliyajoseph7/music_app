@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-
+from django.conf import settings
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
@@ -47,4 +47,18 @@ class InfoSource(models.Model):
 
     def __str__(self):
         return self.post.title
+
+class WordsOfWisdom(models.Model):
+    title       = models.CharField(max_length=100)
+    image       = models.ImageField(upload_to='wisdom_images', default="scoan.png")
+    contents    = models.TextField()
+    date        = models.DateField(auto_now=True)
+    image_thumbnail = ImageSpecField(source='image',
+                                        processors=[ResizeToFill(1332, 850)],
+                                        format='JPEG',
+                                        options={'quality': 70})
+    def __str__(self):
+        return self.title
     
+    class Meta:
+        ordering = ['-date']
