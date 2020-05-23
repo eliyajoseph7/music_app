@@ -30,8 +30,10 @@ urlpatterns = [
     path('', view.index),
     path('blog-home', view.blog_home),
     path('test', view.blog_home),
+    path('words', view.words),
     path('', include(extra_patterns), name="view_info"),
     path('etv', view.emmanuel_tv),
+    path('about-me', view.aboutMe),
     path('admin/', admin.site.urls),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
