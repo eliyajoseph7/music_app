@@ -1,6 +1,6 @@
-{% include 'navbar/navbar.html' %} {% load static %}
+{% include 'navbar/wordsNav.html' %} {% load static %}
 
-<div class="container">
+<div class="container contents bg-light">
 
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3">{{object.title}}
@@ -40,7 +40,7 @@
                 <p class="mb-0 mt-3"> </p>Written by: {{object.author}} on {{object.date}}
                 <footer class="blockquote-footer w-100">The information source is:<br />{% for info in infoSources %} {% if info %}
 
-                    <i class="fa fa-angle-right"></i> <cite title="Source Title"><a href="{{info.info_source}}" target="_blank">{{info.info_source}}</a></cite>
+                    <i class="fa fa-angle-right"></i> <cite title="{{object.title}}"><a href="{{info.info_source}}" target="_blank">{{info.info_source}}</a></cite>
                     <br /> {% endif %}{% endfor %}
                 </footer>
             </blockquote>
@@ -161,7 +161,8 @@
 
             <div class="card my-5">
                 <h5 class="card-header ">One of my project</h5>
-                <iframe name="Framename " src="http://desolate-shelf-21097.herokuapp.com/home" width="100% " height="500 " frameborder="0 " scrolling="auto " class="frame-area ">
+                <iframe name="Framename " src="http://desolate-shelf-21097.herokuapp.com/home" width="100% " height="500 " frameborder="0 " scrolling="auto " class="frame-area ">        </iframe>
+
             </div>
             <!-- Side Widget -->
             <div class="card my-4 tv ">
@@ -172,63 +173,64 @@
                 </a>
             </div>
         </div>
-        </iframe>
-            </div>
-            <!-- /.row -->
+    </div>
+    <!-- /.row -->
 
-        </div>
-        <!-- /.container -->
-        </body>
-        {% include 'scripts/scripts.html'%}
+</div>
+<!-- /.container -->
+{% include 'indexComponents/footer.html' %}
 
-        </html>
+</body>
+{% include 'scripts/scripts.html'%}
 
-        <style>
-            /* The device with borders */
-            
-            .smartphone {
-                position: relative;
-                width: 360px;
-                height: 640px;
-                margin: auto;
-                border: 16px black solid;
-                border-top-width: 60px;
-                border-bottom-width: 60px;
-                border-radius: 36px;
-            }
-            /* The horizontal line on the top of the device */
-            
-            .smartphone:before {
-                content: '';
-                display: block;
-                width: 60px;
-                height: 5px;
-                position: absolute;
-                top: -30px;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #333;
-                border-radius: 10px;
-            }
-            /* The circle on the bottom of the device */
-            
-            .smartphone:after {
-                content: '';
-                display: block;
-                width: 35px;
-                height: 35px;
-                position: absolute;
-                left: 50%;
-                bottom: -65px;
-                transform: translate(-50%, -50%);
-                background: #333;
-                border-radius: 50%;
-            }
-            /* The screen (or content) of the device */
-            
-            .smartphone .content {
-                /* width: 360px; */
-                height: 520px;
-                background: white;
-            }
-        </style>
+</html>
+
+<style>
+    /* The device with borders */
+    
+    .smartphone {
+        position: relative;
+        width: 360px;
+        height: 640px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+    }
+    /* The horizontal line on the top of the device */
+    
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+    /* The circle on the bottom of the device */
+    
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+    /* The screen (or content) of the device */
+    
+    .smartphone .content {
+        /* width: 360px; */
+        height: 520px;
+        background: white;
+    }
+</style>
