@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Post, InfoSource, WordsOfWisdom
+from .models import Post, InfoSource, WordsOfWisdom, AboutMe, Experience
 # Create your views here.
 
 def index(request):
@@ -49,6 +49,7 @@ def test(request):
 def words(request):
     wisdom = WordsOfWisdom.objects.all().order_by('-id')
     obje = Post.objects.all().order_by('-id')[:7]
+    context = AboutMe.objects.get()
     page = request.GET.get('page', 1)
 
     paginator = Paginator(wisdom, 4)
@@ -59,8 +60,10 @@ def words(request):
         words = paginator.page(1)
     except EmptyPage:
         words = paginator.page(paginator.num_pages)
-    return render(request, 'blog/words.html', {'words': words, 'obje': obje})
+    return render(request, 'blog/words.html', {'words': words, 'obje': obje, 'context': context})
 
 
 def aboutMe(request):
-    return render(request, 'blog/aboutMe.html')    
+    context = AboutMe.objects.get()
+    experience = Experience.objects.all()
+    return render(request, 'blog/aboutMe.html', {'context': context, 'experience': experience})    
