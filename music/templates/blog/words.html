@@ -60,6 +60,7 @@
         </div>
 
         <div class="col-md-3 sidebar">
+            <div class="vl"></div>
             <div class="card mb-3 shadow">
                 <div class="card-header">
                     <hi>About the Author</hi>
@@ -67,8 +68,8 @@
                 <div class="card-body">
                     <div style="display:inline;" class="float-left"><img src="{%  static 'assets/img/me.jpg' %}" style="width: 3rem; height: 3rem; border-radius: 100%;" /></div>
 
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ratione voluptatem eligendi sunt alias adipisci neque minus temporibus dolores? </p>
-                    <a href="/about-me" class="btn btn-info">view more</a>
+                    <p>{{context.intro | truncatewords:10}} </p>
+                    <a href="/about-me" class="btn btn-outline-info">view more</a>
                 </div>
             </div>
             <div>
