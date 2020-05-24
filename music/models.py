@@ -62,3 +62,21 @@ class WordsOfWisdom(models.Model):
     
     class Meta:
         ordering = ['-date']
+
+class AboutMe(models.Model):
+    intro       = models.TextField()        
+    work        = models.TextField(default="", null=True)
+    accomplish  = models.TextField()
+    date        = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.intro
+
+class Experience(models.Model):
+    header = models.CharField(max_length=500)   
+    contents = models.TextField() 
+    myExperience        = models.ForeignKey(AboutMe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.header
+    
